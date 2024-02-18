@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    .hour {
+      display: block;
+      float: left;
+      width: 60px;
+      height: 50px;
+      margin: 0 10px;
+      background-color: #333;
+      color: white;
+    }
+
+    .minute {
+      display: block;
+      float: left;
+      width: 60px;
+      height: 50px;
+      margin: 0 10px;
+      background-color: #333;
+      color: white;
+    }
+
+    .second {
+      display: block;
+      float: left;
+      width: 60px;
+      height: 50px;
+      margin: 0 10px;
+      background-color: #333;
+      color: white;
+    }
+  </style>
+</head>
+<!--
+    这个倒计时是不断变化的,因此需要定时器来自动变化(setinterval)
+    三个黑色盒子里面分别存放时分秒
+    三个黑色盒子利用innerHTML放入计算的小时分秒数
+    第一次执行也是间隔毫秒数,因此刷新页面会有空白
+    最好采取封装函数的方式,这样可以先调用一次这个函数,放在刚开始刷新页面有空白问题
+  -->
+
+<body>
+  <span class="hour">1</span>
+  <span class="minute">2</span>
+  <span class="second">3</span>
+  <script>
+    var hour = document.querySelector('.hour');
+    var minute = document.querySelector('.minute');
+    var second = document.querySelector('.second');
+    var inputTime = +new Date('2024-2-25 19:57:00');//返回的是用户输入时间总的毫秒数
+    countDown();//我们先调用一次这个函数,防止第一次刷新页面有空白
+    //开启定时器
+    setInterval(countDown, 1000);
+
+    function countDown() {
+      var nowTime = +new Date();//返回的是当前时间总的毫秒数
+      var times = (inputTime - nowTime) / 1000;//times是剩余时间总的秒数
+      var h = parseInt(times / 60 / 60 % 24);//时
+      h = h < 10 ? '0' + h : h;
+      hour.innerHTML = h;//把剩余的小时给 小时黑色盒子
+      var m = parseInt(times / 60 % 60);//分
+      m = m < 10 ? '0' + m : m;
+      minute.innerHTML = m;
+      var s = parseInt(times % 60);//秒
+      s = s < 10 ? '0' + s : s;
+      second.innerHTML = s;
+    }
+  </script>
+</body>
+
+</html>
