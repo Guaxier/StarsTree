@@ -361,4 +361,3 @@ function mainpage(){
 			  </p>
 		</div>";
 };
-?>
