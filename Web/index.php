@@ -16,13 +16,13 @@ ipAddress();
 <!--设置网站内容摘要-->
 		<meta name="description" content="郭影">
 <!--设置网站图标-->
-		<link rel="shortcut icon" href="/IMG/qilingwl.ico">
-		<link rel="apple-touch-icon" href="/IMG/qilingwl.ico">
+		<link rel="shortcut icon" href="/Web/IMG/qilingwl.ico">
+		<link rel="apple-touch-icon" href="/Web/IMG/qilingwl.ico">
 <!--引用日记日历样式表-->
-  		<link rel="stylesheet" href="/Diary/css/calendar.css">
-		<link rel="stylesheet" href="/Diary/font/iconfont.css">
+  		<link rel="stylesheet" href="/Web/Diary/css/calendar.css">
+		<link rel="stylesheet" href="/Web/Diary/font/iconfont.css">
 <!--引用主要css样式表-->
-		<link rel="stylesheet" type="text/css" href="/CSS/maincss.css">
+		<link rel="stylesheet" type="text/css" href="/Web/CSS/maincss.css">
 <!--解决兼容性-IE8模拟渲染-->
     	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <!--设置网站关键词-->
@@ -30,11 +30,11 @@ ipAddress();
 <!--基本自适应模式-->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!--文案馆-->
-	<script src="/JS/sentence.js"></script>
+	<script src="/Web/JS/sentence.js"></script>
 <!--日记-日历-日期选择函数-->
-	<script src="/Diary/js/calendar.js"></script>
+	<script src="/Web/Diary/js/calendar.js"></script>
 <!--引用主要js函数表-->
-  	 	<script src="/JS/mainjs.js" type="text/javascript"></script>
+  	 	<script src="/Web/JS/mainjs.js" type="text/javascript"></script>
 <!--引用ajax-->
 		<script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.11.0.min.js"></script>
 	</head>

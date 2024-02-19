@@ -1,9 +1,9 @@
 <!--数据库连接方案-->
 <?php
-$servername = "localhost";//数据库地址
-$username = "www_qilingwl_com";//用户名
-$password = "4njf7y3zicaxTBa7";//密码
-$dbname = "www_qilingwl_com";//数据库名
+$servername = "47.76.82.65";//数据库地址
+$username = "wwwsql";//用户名
+$password = "wwwsql";//密码
+$dbname = "wwwsql";//数据库名
  
 // 创建连接
 $conn = new mysqli($servername, $username, $password, $dbname);//连接数据库
