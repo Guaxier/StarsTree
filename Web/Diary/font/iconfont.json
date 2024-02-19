@@ -1,0 +1,37 @@
+{
+  "id": "528343",
+  "name": "快搜系统",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "2583881",
+      "name": "叉叉",
+      "font_class": "chacha",
+      "unicode": "e62f",
+      "unicode_decimal": 58927
+    },
+    {
+      "icon_id": "2155506",
+      "name": "日历",
+      "font_class": "rili",
+      "unicode": "e646",
+      "unicode_decimal": 58950
+    },
+    {
+      "icon_id": "1254326",
+      "name": "用户",
+      "font_class": "yonghu",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "2038803",
+      "name": "锁",
+      "font_class": "suo",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    }
+  ]
+}

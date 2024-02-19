@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>日历</title>
+  <link rel="stylesheet" href="font/iconfont.css">
+  <link rel="stylesheet" href="css/calendar.css">
+</head>
+<body>
+  <div style="text-align:center;">
+    <input type="text" id="calendarInput"> 
+  </div>
+  <script src="js/calendar.js"></script>
+  <script>
+    //获取文本框
+    var eCalendarInput = document.getElementById('calendarInput');
+    //配置选项
+    var oConfig = {
+      format:'yyyy/MM/dd',  //日期格式
+      // value:'2019-3-3', //默认值
+      placeholder:'请选择日期',
+      // disabled:true,
+      model:'date'
+    }
+    //调用日历构造函数生成实例对象
+    var oCalenderObj = new CalendarPlugin(eCalendarInput,oConfig);
+    
+  </script>
+</body>
+</html>
