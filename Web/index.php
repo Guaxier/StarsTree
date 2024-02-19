@@ -38,7 +38,7 @@ ipAddress();
 <!--引用ajax-->
 		<script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.11.0.min.js"></script>
 	</head>
-<body id="main-page-body" onload="but(8)">
+<body id="main-page-body">
 	<div >
 
 
