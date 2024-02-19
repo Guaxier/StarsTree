@@ -50,7 +50,7 @@ ipAddress();
 				<!--主页-->
 				<div id='main-page-body-out'>
 					  <p>
-						 <img id='main-page-body-img' src='http://q2.qlogo.cn/headimg_dl?dst_uin=3417258524&spec=100' alt='头像获取失败'>
+						 <img id='main-page-body-img' src='http://q2.qlogo.cn/headimg_dl?dst_uin=2537094196&spec=100' alt='头像获取失败'>
 					  </p>
 					  <h1 id='main-page-body-title'>
 						 <strong>郭影</strong>
