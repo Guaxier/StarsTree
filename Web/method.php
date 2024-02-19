@@ -1,59 +1,46 @@
 <?php
-//获取客户端IP及属地
-function ipAddress(){
-    //获取客户端IP地址
-		//定义地址变量
-			$ipAddress = "";
-		//定义属地变量
-			$ipSite = "";
-		//取得IP
-			if(getenv('HTTP_CLIENT_IP')) {
-				$ipAddress = getenv('HTTP_CLIENT_IP');
-			} 
-			elseif(getenv('HTTP_X_FORWARDED_FOR')) {
-				$ipAddress = getenv('HTTP_X_FORWARDED_FOR');
-			} 
-			elseif(getenv('REMOTE_ADDR')) {
-				$ipAddress = getenv('REMOTE_ADDR');
-			} 
-			else {
-				$ipAddress = $HTTP_SERVER_VARS['REMOTE_ADDR'];
-			}
+// 获取客户端IP及属地
+function ipAddress() {
+    // 获取客户端IP地址
+    $ipAddress = "";
+    // 定义属地变量
+    $ipSite = "";
 
-//获取客户端属地
-		//太平洋网络查询ip(较快,稳定,免费)     
-			$ch = curl_init();
-			$url = 'https://whois.pconline.com.cn/ipJson.jsp?ip='.$ipAddress;
-		//用curl发送接收数据
-			curl_setopt($ch, CURLOPT_URL, $url);
-			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		//请求为https
-			curl_setopt ( $ch, CURLOPT_SSL_VERIFYPEER, false );
-			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-			$location = curl_exec($ch);
-			curl_close($ch);
-		//转码
-			$location = mb_convert_encoding($location, 'utf-8','GB2312');
-		//var_dump($location);
-		//截取{}中的字符串
-			$location = substr($location, strlen('({')+strpos($location, '({'),(strlen($location) - strpos($location, '})'))*(-1));
-		//将截取的字符串$location中的‘，’替换成‘&’   将字符串中的‘：‘替换成‘=’
-			$location = str_replace('"',"",str_replace(":","=",str_replace(",","&",$location)));
-		//php内置函数，将处理成类似于url参数的格式的字符串  转换成数组
-			parse_str($location,$ip_location);
-		//取得IP地址
-			$ipSite = $ip_location['pro'].$ip_location['city'].$ip_location['region'];
-		//特殊模式下(流量或未知地址等)属地为空返回运营商/运营商为空返回未知地址
-			if ($ipSite == ""){
-				$ipSite = $ip_location['addr'];	
-					if($ipSite == ""){
-						$ipSite = "未知地址";
-					}
-			}
-	//通过全局变量存储IP
-	$GLOBALS['ipAddress'] = $ipAddress;
-	//通过全局变量存储属地
-	$GLOBALS['ipSite'] = $ipSite;
+    // 取得IP
+    if (isset($_SERVER['HTTP_CLIENT_IP']) && $_SERVER['HTTP_CLIENT_IP']) {
+        $ipAddress = $_SERVER['HTTP_CLIENT_IP'];
+    } elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && $_SERVER['HTTP_X_FORWARDED_FOR']) {
+        $ipAddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    } elseif (isset($_SERVER['REMOTE_ADDR'])) {
+        $ipAddress = $_SERVER['REMOTE_ADDR'];
+    } else {
+        $ipAddress = $_SERVER['REMOTE_ADDR'] ?? $_SERVER['HTTP_X_FORWARDED_FOR'];
+    }
+
+    // 获取客户端属地，更换为腾讯云IP查询API（稳定、免费）
+    $ch = curl_init();
+    $url = 'https://ip.tencent.com/service/getlocation.php?ip=' . $ipAddress;
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+    $response = curl_exec($ch);
+    curl_close($ch);
+
+    // 解析JSON数据
+    $ip_location = json_decode($response, true);
+    
+    // 取得IP属地信息
+    if(isset($ip_location['country']) && isset($ip_location['province']) && isset($ip_location['city'])) {
+        $ipSite = $ip_location['country'].$ip_location['province'].$ip_location['city'];
+    } else {
+        $ipSite = "未知地址";
+    }
+
+    // 通过全局变量存储IP
+    $GLOBALS['ipAddress'] = $ipAddress;
+    // 通过全局变量存储属地
+    $GLOBALS['ipSite'] = $ipSite;
 };
 
 
@@ -158,8 +145,9 @@ function DiaryMain($Mdete){
 		include 'db.php';
 		//开始连接
 		if ($conn->connect_error) {
-		//连接状态
-			die("连接失败: " . $conn->connect_error);
+			//连接状态
+			error_log("连接失败: " . $conn->connect_error);
+			exit;
 		} 
 		//查询日记状态
 		$sql = "SELECT MTF FROM Diary where Mdete = '$Mdete'";
