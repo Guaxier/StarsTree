@@ -151,6 +151,3 @@ function getdiary($parameter){
 
 
 
-
-
-?>
