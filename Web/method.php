@@ -143,6 +143,9 @@ function Diarydete($Mdete){
 function DiaryMain($Mdete){
 		//获取连接信息
 		include 'db.php';
+		// 创建连接
+		$conn = new mysqli($servername, $username, $password, $dbname);//连接数据库
+		$conn->query("set names utf8");//统一编码
 		//开始连接
 		if ($conn->connect_error) {
 			//连接状态
@@ -188,8 +191,14 @@ function DiaryMain($Mdete){
 				$sql = "SELECT MID,MtimeA,Mweather,Mmood,MdiaryA FROM Diary where Mdete = '$Mdete'";
 				//执行查询
 				$result = $conn->query($sql);
-				//取得数组
-				$row = mysql_fetch_array($result);
+				// 检查查询是否成功
+				if ($result) {
+					// 取得数组
+					$row = $result->fetch_array(MYSQLI_ASSOC);
+				} else {
+					// 记录错误信息或处理查询失败的情况
+					error_log("SQL 查询执行失败: " . $conn->error);
+				}
 				//输出日记
 				while($row = $result->fetch_assoc()) {
 					//标识
@@ -212,8 +221,14 @@ function DiaryMain($Mdete){
 				$sql = "SELECT MID,MtimB,Mweather,Mmood,MdiaryB FROM Diary where Mdete = '$Mdete'";
 				//执行查询
 				$result = $conn->query($sql);
-				//取得数组
-				$row = mysql_fetch_array($result);
+				// 检查查询是否成功
+				if ($result) {
+					// 取得数组
+					$row = $result->fetch_array(MYSQLI_ASSOC);
+				} else {
+					// 记录错误信息或处理查询失败的情况
+					error_log("SQL 查询执行失败: " . $conn->error);
+				}
 				//输出日记
 				while($row = $result->fetch_assoc()) {
 					//标识
